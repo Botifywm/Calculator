@@ -15,23 +15,29 @@ const equals = document.querySelector(".pad.equal")
 
 // global variables to be updated and shared across the functions and events listener
 // updateOperator is to update the status of operator via display.js so when I click on AC
-let a = 0;
-let b = 0;
+export let a = 0;
+export let b = 0;
 export let operator = "";
-export function updateOperator() {operator = ""}
+export function updateOperator() {operator = ""; a = 0; b = 0;}
+
+// tracks if the toggle effect is on - 0 means false and 1 means true
+let toggleOperator = 0;
 
 // All the numpads except for the operators are identified through the selectors
 // they are categorised based on their column position
 column1.addEventListener("click", (event, operator) => {
-    operator = displayColm1(event);
+    displayColm1(event);
+    removeToggle();
 })
 
 column2.addEventListener("click", (event) => {
     displayColm2(event);
+    removeToggle();
 })
 
 column3.addEventListener("click", (event) => {
     displayColm3(event);
+    removeToggle();
 })
 
 
@@ -52,6 +58,16 @@ plus.addEventListener("click", () => {
         operator = "plus";
             // console.log(3)
     }
+
+    if (toggleOperator === 0){
+        plus.classList.add("toggle");
+        toggleOperator = 1;
+    }
+    else {
+        removeToggle();
+        plus.classList.add("toggle");
+        toggleOperator = 1;
+    }
 })
 
 minus.addEventListener("click", () => {
@@ -69,6 +85,16 @@ minus.addEventListener("click", () => {
         stopper();
         operator = "minus";
         // console.log(3)
+    }
+
+    if (toggleOperator === 0){
+        minus.classList.add("toggle");
+        toggleOperator = 1;
+    }
+    else {
+        removeToggle();
+        minus.classList.add("toggle");
+        toggleOperator = 1;
     }
 })
 
@@ -88,6 +114,16 @@ multiply.addEventListener("click", () => {
         operator = "multiply";
         // console.log(2)
     }
+
+    if (toggleOperator === 0){
+        multiply.classList.add("toggle");
+        toggleOperator = 1;
+    }
+    else {
+        removeToggle();
+        multiply.classList.add("toggle");
+        toggleOperator = 1;
+    }
 })
 
 divide.addEventListener("click", () => {
@@ -105,6 +141,16 @@ divide.addEventListener("click", () => {
         stopper();
         operator = "divide";
             // console.log(3)
+    }
+
+    if (toggleOperator === 0){
+        divide.classList.add("toggle");
+        toggleOperator = 1;
+    }
+    else {
+        removeToggle();
+        divide.classList.add("toggle");
+        toggleOperator = 1;
     }
 })
 
@@ -132,6 +178,10 @@ equals.addEventListener("click", () => {
 // convert to 9 decimal places
 function decimals(num) {
     num = Math.round(num * 1000000000) / 1000000000;
+    let numStr = num.toString();
+    if (numStr.length > 12) {
+        num = parseFloat(num).toPrecision(9)
+    }
     return num
 }
 
@@ -186,4 +236,11 @@ function chainOperators (nextOperator){
     screen.textContent = a;
     operator = nextOperator;
     stopper();
+}
+
+// part of UI for the user to know which operator is currently active
+// this removes the toggle effect when another button is pressed
+function removeToggle() {
+    document.querySelector(".toggle").classList.remove("toggle");
+    toggleOperator = 0;
 }

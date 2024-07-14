@@ -1,32 +1,36 @@
 body{
-    background-color: blueviolet;
+    background-color: #CBA72C;
 }
 
 .container{
-    width: 500px;
-    height: 650px;
+    max-width: 500px;
+    height: 600px;
     border: 2px solid black;
     margin: auto;
     margin-top: 64px;
     display: flex;
     flex-direction: column;
-    background-color: aliceblue;
+    background-color: #D2D0C2;
 }
 
 .screen{
     box-sizing: border-box;
     border: 10px solid black;
+    border-top: 20px solid black;
     display: flex;
     height: 150px;
+    max-width: 500px;
     justify-content: flex-end;
     align-items:flex-end;
-    font-size: 90px;
+    font-size: 55px;
+    font-family: monospace;
 }
 
 .numPad{
     display: flex;
     flex: 1;
     background-color: black;
+    border: 10px solid black;
     /* flex-direction: column; */
 }
 
@@ -65,7 +69,37 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 25px;
     border-radius: 10%;
-    background-color: white;
+    background-color: #989793;
+    font-family:monospace;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+}
+
+.pad:active{
+    opacity: 0.7;
+}
+
+.toggle{
+    opacity: 0.5;
+}
+
+.decimal{
+    font-size: 30px;
+    align-items: center;
+}
+
+.cancel, .del {
+    background-color: #8E8011;
+}
+
+.plus, .minus, .multiply, .division, .percent{
+    background-color: #64635C;
+    color: #C2B12C;
+}
+
+.equal {
+    background-color: #823D9E;
+    color: #C2B12C;
 }
